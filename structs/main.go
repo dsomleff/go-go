@@ -5,7 +5,7 @@ import "fmt"
 type cat struct {
 	firstName string
 	lastName  string
-	contact   familyContact
+	familyContact
 }
 
 type familyContact struct {
@@ -17,12 +17,22 @@ func main() {
 	batat := cat{
 		firstName: "Batat",
 		lastName:  "The Cat",
-		contact: familyContact{
+		familyContact: familyContact{
 			contactName:  "Ju",
 			contactPhone: 123,
 		},
 	}
 
-	fmt.Println(batat)
-	fmt.Printf("%+v", batat)
+	batat.print()
+	batat.updateName("Batya")
+	batat.print()
+}
+
+func (c cat) print() {
+	fmt.Println(c)
+	fmt.Printf("%+v", c)
+}
+
+func (c *cat) updateName(newFirstName string) {
+	(*c).firstName = newFirstName
 }
